@@ -17,17 +17,13 @@ class RandomChar extends Component {
 
     componentDidMount() {
         this.updateChar();
-        // this.timerId = setInterval(this.updateChar, 15000);
-        // console.log("mount");
     }
 
     componentWillUnmount() {
         clearInterval(this.timerId);
-        // console.log("unmount");
     }
 
     onCharLoaded = (char) => {
-        // console.log("update");
         this.setState({
             char: char,
             loading: false,
@@ -47,11 +43,9 @@ class RandomChar extends Component {
             .getCharacter(id)
             .then(this.onCharLoaded)
             .catch(this.onError);
-        // .getAllCharacters().then(res => console.log(res));
     }
 
     render() {
-        // console.log("render");
         const { char, loading, error } = this.state;
         const errorMessage = error ? <ErrorMessage /> : null;
         const spiner = loading ? <Spinner /> : null;
@@ -70,7 +64,7 @@ class RandomChar extends Component {
                     <p className="randomchar__title">
                         Or choose another one
                     </p>
-                    <button className="button button__main">
+                    <button onClick={this.updateChar} className="button button__main">
                         <div className="inner">try it</div>
                     </button>
                     <img src={mjolnir} alt="mjolnir" className="randomchar__decoration" />
